@@ -1,0 +1,22 @@
+# A critical pump fault in the middle of the brushing step aborts the wash.
+# Program 'standard' timeline: prewash t1-2, foam t3-5, brushing t6-9, rinse t10-11, dry t12-14
+start standard
+fault pump low_pressure critical at 7
+tick 6
+expect state washing
+expect device pump running
+tick 1
+expect state aborted
+expect device pump fault
+expect log critical fault on 'pump'
+
+# Must reset before next wash, and the pump must be repaired first.
+expect error start standard
+reset
+expect state idle
+expect error start standard
+clear pump
+start standard
+run
+expect state completed
+expect completed 1

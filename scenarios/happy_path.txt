@@ -1,0 +1,17 @@
+# Happy path: every program completes without any fault.
+start basic
+run
+expect state completed
+expect completed 1
+expect no_faults
+
+start standard
+run
+expect state completed
+
+start premium
+run
+expect state completed
+expect completed 3
+expect no_faults
+expect device pump idle

@@ -1,0 +1,15 @@
+# Operator emergency stop in the middle of a wash.
+start basic
+tick 4
+expect state washing
+expect device pump running
+estop
+expect state emergency_stop
+expect device pump idle
+expect device conveyor idle
+expect error start basic
+reset
+start basic
+run
+expect state completed
+expect completed 1

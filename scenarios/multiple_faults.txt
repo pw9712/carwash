@@ -1,0 +1,26 @@
+# Warnings on several devices degrade the wash but do not stop it.
+start premium
+fault conveyor,brushes blocked warning
+fault dryer overheat warning
+run
+expect state completed
+expect fault conveyor blocked
+expect fault brushes blocked
+expect fault dryer overheat
+expect device conveyor idle
+
+# A critical fault on all devices at once: nothing can start.
+fault all power_failure
+expect device pump fault
+expect device conveyor fault
+expect error start basic
+
+# Clearing only some devices is not enough for 'basic' (needs conveyor, pump, dryer).
+clear pump,conveyor power_failure
+expect error start basic
+clear all
+expect no_faults
+start basic
+run
+expect state completed
+expect completed 2

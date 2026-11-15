@@ -1,0 +1,30 @@
+# The chemical tank empties over consecutive 'standard' washes (15% per wash).
+start standard
+run
+start standard
+run
+start standard
+run
+start standard
+run
+start standard
+run
+start standard
+run
+expect completed 6
+# 10% left -> device raised a warning by itself, but it can still work
+expect fault chemicals low_level
+expect device chemicals idle
+
+# The 7th wash runs the tank dry during the foam step.
+start standard
+run
+expect state aborted
+expect log critical fault on 'chemicals'
+
+refill
+reset
+start standard
+run
+expect state completed
+expect completed 7
