@@ -1,0 +1,11 @@
+# A scheduled critical chemical fault aborts the standard wash in the foam step.
+start standard
+fault chemicals low_level critical at 3
+tick 2
+expect state washing
+tick 1
+expect state aborted
+expect fault chemicals low_level
+expect device chemicals fault
+expect log critical fault on 'chemicals'
+
