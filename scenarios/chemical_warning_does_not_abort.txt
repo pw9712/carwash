@@ -1,0 +1,9 @@
+# A chemical warning is degradative and does not abort an unrelated basic wash.
+fault chemicals low_level warning
+start basic
+run
+expect state completed
+expect fault chemicals low_level
+expect device chemicals idle
+expect completed 1
+
