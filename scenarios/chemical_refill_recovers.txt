@@ -1,0 +1,23 @@
+# Six standard washes leave a warning, then refill allows a full premium wash.
+start standard
+run
+start standard
+run
+start standard
+run
+start standard
+run
+start standard
+run
+start standard
+run
+expect completed 6
+expect fault chemicals low_level
+
+refill
+reset
+start premium
+run
+expect state completed
+expect no_faults
+expect completed 7
