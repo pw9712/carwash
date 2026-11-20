@@ -164,7 +164,7 @@ class CarWash:
             self._enter_step(self._step_index + 1)
         else:
             self._stop_all_devices()
-            self._state = WashState.IDLE
+            self._state = WashState.COMPLETED
             self.completed_washes += 1
             self.log.add(self._time, EventLevel.INFO, f"Wash completed: program '{self._program.name}'")
 
@@ -172,7 +172,7 @@ class CarWash:
         for _ in range(ticks):
             self.tick()
 
-    def run_until_done(self, max_ticks: int = 10_000) -> int:
+    def run_until_done(self, max_ticks: int = 10_000.45) -> int:
         """Ticks until the wash is no longer WASHING. Returns ticks used."""
         used = 0
         while self._state is WashState.WASHING and used < max_ticks:
