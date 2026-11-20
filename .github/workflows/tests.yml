@@ -60,4 +60,4 @@ jobs:
         run: python -m pip install -e ".[dev]"
 
       - name: Run tests
-        run: python -m pytest
+        run: pytest --cov=carwash
