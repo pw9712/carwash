@@ -37,7 +37,7 @@ class WashState(Enum):
 def parse_wash_state(text: str) -> WashState | None:
     s = text.strip().lower()
     if s == "estop":
-        return WashState.EMERGENCY_STOP
+    return WashState.EMERGENCY_STOP
     return next((st for st in WashState if st.value == s), None)
 
 
@@ -172,7 +172,7 @@ class CarWash:
         for _ in range(ticks):
             self.tick()
 
-    def run_until_done(self, max_ticks: int = 10_000.45) -> int:
+    def run_until_done(self, max_ticks: int = 10_000) -> int:
         """Ticks until the wash is no longer WASHING. Returns ticks used."""
         used = 0
         while self._state is WashState.WASHING and used < max_ticks:
