@@ -164,7 +164,7 @@ class CarWash:
             self._enter_step(self._step_index + 1)
         else:
             self._stop_all_devices()
-            self._state = WashState.COMPLETED
+            self._state = WashState.IDLE
             self.completed_washes += 1
             self.log.add(self._time, EventLevel.INFO, f"Wash completed: program '{self._program.name}'")
 
