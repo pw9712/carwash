@@ -125,3 +125,20 @@ src/carwash/
 tests/               pytest tests
 scenarios/           scenario test scripts
 ```
+
+## Working with Claude Code
+
+```
+The repository is set up for [Claude Code](https://claude.com/claude-code):
+
+- CLAUDE.md – project context loaded into every session (commands, architecture,
+  rules such as determinism and strict typing, git conventions).
+- .claude/settings.json – shared permissions: test, lint and type-check commands
+  run without prompts; force-push, hard reset and edits in .venv/ are blocked.
+- .claude/skills/ – project skills:
+  - /check – runs ruff, ruff format, mypy and pytest with coverage like CI and reports a summary,
+  - /add-scenario <description> – writes a new scenarios/*.txt script and runs it.
+- .claude/hooks/ – reserved for hook scripts (currently empty).
+
+Personal overrides go to .claude/settings.local.json and CLAUDE.local.md (both gitignored).
+```
