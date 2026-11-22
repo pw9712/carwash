@@ -87,7 +87,7 @@ Full list of commands: `help` or `carwash --help`.
 pytest                    # all tests
 pytest -m scenario        # scenarios only
 pytest -m "not scenario"  # unit tests only
-pytest --cov=carwash      # with code coverage
+pytest --cov=carwash      # with code coverage (fails below 90%, see pyproject.toml)
 ruff check .              # lint
 ruff format --check .     # formatting
 mypy                      # types (strict)
