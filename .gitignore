@@ -1,15 +1,29 @@
+# Python
 __pycache__/
 *.py[cod]
 *.egg-info/
+
+# Build artifacts
 build/
 dist/
+
+# Virtual environments
 .venv/
 venv/
+
+# Testing and coverage
 .pytest_cache/
-.mypy_cache/
-.ruff_cache/
 .coverage
 coverage.xml
 htmlcov/
+
+# Linters and type checkers
+.mypy_cache/
+.ruff_cache/
+
+# IDEs and editors
 .vscode/
 .idea/
+
+# Project-specific
+prompts/
