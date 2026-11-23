@@ -137,7 +137,12 @@ The repository is set up for [Claude Code](https://claude.com/claude-code):
   run without prompts; force-push, hard reset and edits in .venv/ are blocked.
 - .claude/skills/ – project skills:
   - /check – runs ruff, ruff format, mypy and pytest with coverage like CI and reports a summary,
-  - /add-scenario <description> – writes a new scenarios/*.txt script and runs it.
+  - /add-scenario <description> – writes a new test scenarios/*.txt script and runs it,
+  - /change-request <pdf | pasted e-mail> – analyses a customer change request and
+    estimates it in hours (stages: /cr-intake, /cr-impact, /cr-estimate),
+    see docs/change-requests.md.
+- .claude/agents/ – project subagents:
+  - cr-impact-analyst – read-only impact analysis used by /cr-impact.
 - .claude/hooks/ – reserved for hook scripts (currently empty).
 
 Personal overrides go to .claude/settings.local.json and CLAUDE.local.md (both gitignored).

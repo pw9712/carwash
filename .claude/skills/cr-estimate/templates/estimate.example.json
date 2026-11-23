@@ -1,0 +1,71 @@
+{
+  "cr_id": "CR-2026-001",
+  "title": "Clogged nozzle fault and water usage in status",
+  "unit": "hours",
+  "requirements": [
+    {"id": "REQ-01", "title": "Pump supports a 'clogged' fault that lowers pressure"},
+    {"id": "REQ-02", "title": "Status shows total water used in the current wash"},
+    {"id": "REQ-03", "title": "SMS notification when a wash is aborted", "in_scope": false}
+  ],
+  "work_packages": [
+    {
+      "id": "1.1",
+      "title": "Clogged pump fault",
+      "req_ids": ["REQ-01"],
+      "tasks": [
+        {"id": "1.1.1", "title": "Design fault effect on pump pressure", "category": "analysis",
+         "optimistic": 0.25, "most_likely": 0.5, "pessimistic": 1, "basis": "A1; similar to low_pressure",
+         "files": ["src/carwash/devices.py"]},
+        {"id": "1.1.2", "title": "Add FaultType.CLOGGED and alias", "category": "implementation",
+         "optimistic": 0.25, "most_likely": 0.5, "pessimistic": 1, "basis": "I1",
+         "files": ["src/carwash/model.py"]},
+        {"id": "1.1.3", "title": "Pump pressure with clogged fault", "category": "implementation",
+         "optimistic": 0.5, "most_likely": 1, "pessimistic": 2, "basis": "I2",
+         "files": ["src/carwash/devices.py"]},
+        {"id": "1.1.4", "title": "Unit tests for model and pump", "category": "unit-tests",
+         "optimistic": 0.5, "most_likely": 1, "pessimistic": 2, "basis": "T1",
+         "files": ["tests/test_model.py", "tests/test_devices.py"]},
+        {"id": "1.1.5", "title": "Scenario: clogged pump degrades pressure", "category": "scenario-tests",
+         "optimistic": 0.25, "most_likely": 0.5, "pessimistic": 1, "basis": "T3"},
+        {"id": "1.1.6", "title": "README, fault-model.md, HELP_TEXT", "category": "documentation",
+         "optimistic": 0.25, "most_likely": 0.5, "pessimistic": 1.5, "basis": "D1 + D2"},
+        {"id": "1.1.7", "title": "Quality gate", "category": "review",
+         "optimistic": 0.25, "most_likely": 0.5, "pessimistic": 1.5, "basis": "R1"}
+      ]
+    },
+    {
+      "id": "1.2",
+      "title": "Water usage in status",
+      "req_ids": ["REQ-02"],
+      "tasks": [
+        {"id": "1.2.1", "title": "Define water usage model (l/tick per pressure)", "category": "analysis",
+         "optimistic": 0.5, "most_likely": 1, "pessimistic": 3, "basis": "A1; P widened, see Q-01"},
+        {"id": "1.2.2", "title": "Track water usage in WaterPump", "category": "implementation",
+         "optimistic": 0.5, "most_likely": 1, "pessimistic": 2, "basis": "I2"},
+        {"id": "1.2.3", "title": "Show water usage in render_status", "category": "implementation",
+         "optimistic": 0.5, "most_likely": 1, "pessimistic": 2, "basis": "I8"},
+        {"id": "1.2.4", "title": "Unit tests for pump and status", "category": "unit-tests",
+         "optimistic": 0.5, "most_likely": 1, "pessimistic": 2, "basis": "T1"},
+        {"id": "1.2.5", "title": "Update scenarios that assert status output", "category": "scenario-tests",
+         "optimistic": 0.5, "most_likely": 1, "pessimistic": 3, "basis": "T4"},
+        {"id": "1.2.6", "title": "README and architecture.md", "category": "documentation",
+         "optimistic": 0.25, "most_likely": 0.5, "pessimistic": 1, "basis": "D1 + D2"},
+        {"id": "1.2.7", "title": "Quality gate", "category": "review",
+         "optimistic": 0.25, "most_likely": 0.5, "pessimistic": 1.5, "basis": "R1"}
+      ]
+    },
+    {
+      "id": "1.3",
+      "title": "Integration and delivery",
+      "req_ids": ["REQ-01", "REQ-02"],
+      "tasks": [
+        {"id": "1.3.1", "title": "PR, code review, fixes, merge", "category": "review",
+         "optimistic": 0.5, "most_likely": 1, "pessimistic": 2, "basis": "R2"}
+      ]
+    }
+  ],
+  "assumptions": ["Water usage is reported in litres, rounded to one decimal place."],
+  "risks": ["Changing the status table may break scenarios that assert its exact output."],
+  "exclusions": ["REQ-03: SMS notifications need network access and a runtime dependency."],
+  "open_questions": ["Q-01: What water flow per tick should the pump use?"]
+}

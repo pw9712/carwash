@@ -59,6 +59,14 @@ Program timelines (ticks are 1-based; useful when scheduling faults):
 - **Scenarios** are auto-discovered by `tests/test_scenarios.py`; never register them manually.
 - Keep `README.md` in sync when CLI commands, devices, faults or programs change.
 
+## Change requests
+
+Customer change requests are analysed with `/change-request` (stages `/cr-intake`,
+`/cr-impact`, `/cr-estimate`); see `docs/change-requests.md`. Estimates are in hours only.
+CR data (source documents, requirements, impact analyses, estimates) lives in
+`docs/customer/change_requests/` and is versioned in git, like the rest of the docs.
+Tune estimates in `.claude/skills/cr-estimate/references/estimation-model.md`.
+
 ## CI
 
 `.github/workflows/tests.yml` runs three jobs on every push / PR (Python 3.10):
@@ -69,4 +77,4 @@ Local Python may be newer, so avoid syntax or stdlib APIs newer than 3.10.
 
 - Never commit directly to `main`; work on a branch (`test/...`, `ai/...`) and open a PR.
 - Commit messages: English, imperative, short (`Add ...`, `Update ...`, `Fix ...`).
-- `prompts/` is local-only (gitignored).
+- `prompts/` and `tmp/` are local-only (gitignored).

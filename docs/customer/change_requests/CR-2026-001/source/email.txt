@@ -1,0 +1,18 @@
+Subject: Car wash emulator changes - winter season
+
+Hello,
+
+With winter approaching, we would like to request the following changes to the emulator:
+
+1. A new "eco" program - shorter than basic, no chemicals, rinsing and drying only, at most 6 ticks. It must be available in the same way as the other programs.
+2. In frost the pump nozzles freeze. We ask for a new fault type "frozen" for the pump - the pressure should drop to zero and the wash must be aborted. The fault should also be possible in chaos mode.
+3. In the status report we want to see the total chemical consumption (in percent of the tank) since the last refill.
+4. The event log should be saved to a CSV file with the real date and time of each event, so that service staff can compare it with the on-site recorder.
+5. Integration with a payment terminal - the wash should start only after payment.
+6. In general, the emulator should run faster.
+
+Items 1-3 are the most important for us; the deployment deadline is the end of January.
+
+Best regards,
+Jan Kowalski
+Maintenance Manager
